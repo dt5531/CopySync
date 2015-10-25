@@ -9,11 +9,16 @@
 #include <unistd.h>
 #include <syslog.h>
 #include <string.h>
+#include "clipboard.h"
 
-void process()
+using namespace std;
+
+void process(Clipboard * clipbd)
 {
 
     syslog (LOG_NOTICE, "Writing to my Syslog");
+    // TODO get server clipboard
+    clipbd -> update();
 }   
 
 void init_log()
