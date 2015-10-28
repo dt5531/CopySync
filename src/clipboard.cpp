@@ -12,12 +12,12 @@ Clipboard::Clipboard()
     value = "";
 }
 
-Clipboard::std::string get_clipboard()
+std::string Clipboard::get_clipboard()
 {
     return value;
 }
 
-Clipboard::int set_clipboard_text(string text)
+int Clipboard::set_clipboard_text(string text)
 {
     size_t len = text.length();
 
@@ -41,14 +41,15 @@ Clipboard::int set_clipboard_text(string text)
     return pclose(xclip) == 0;
 }
 
-Clipboard::void get_clipboard_text()
+void Clipboard::get_clipboard_text()
 {
     // open xclip for read access
-    char * text = nullptr;
+    string txt = "";
+    /* char * text = nullptr; */
     FILE * xclip = popen(XCLIP_SELECT, "r");
     if (!xclip)
     {
-
+        return;
     }
     char buffer[1024];
     size_t len = fread(buffer, sizeof(char), 1023, xclip);
@@ -63,32 +64,28 @@ Clipboard::void get_clipboard_text()
             {
                 text_size += len + 1;
                 text = (char *)realloc(text, sizeof(char) * text_size);
-
-                if(!text)
-                {
-                    Set_clipboard_errmsg("Out of memory");
-                    goto cleanup;
-                }
             }
 
-            memcpy(text + total_len, buffer, len);
+            txt += buffer;
             total_len += len;
-            *(text + total_len) = '\0';
+            /* memcpy(text + total_len, buffer, len); */
+            /* *(text + total_len) = '\0'; */
         }
     }while(len == 1023);
 
     if (pclose != 0)
     {
-        return nullptr;
+        return;
     }
+    value = txt;
     
-    string ret_str = text;
-    value = ret_str;
-    free(text);
+    /* string ret_str = text; */
+    /* value = ret_str; */
+    /* free(text); */
     return;
 }
 
-Clipboard::void update()
+void Clipboard::update()
 {
     get_clipboard_text();
 

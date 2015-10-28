@@ -9,7 +9,9 @@
 #include <unistd.h>
 #include <syslog.h>
 #include <string.h>
+
 #include "clipboard.h"
+#include "config.h"
 
 using namespace std;
 
@@ -32,7 +34,7 @@ void init_log()
     syslog(LOG_INFO, "Daemon starting");
 }
 
-void init_process()
+void init_process(Config * config)
 {
     pid_t pid, sid;
 
@@ -69,6 +71,9 @@ void init_process()
     { 
         exit(EXIT_FAILURE); 
     }
+
+    config -> setSid(sid);
+    config -> setPid(pid);
 
 
     //Close Standard File Descriptors
