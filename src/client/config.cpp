@@ -13,26 +13,26 @@
 
 Config::Config()
 {
-    sid = 0;
-    pid = 0;
+  m_sid = 0;
+  m_pid = 0;
 }
 
 void Config::setSid(pid_t _sid)
 {
-    sid = _sid;
+  m_sid = _sid;
 }
 
 void Config::setPid(pid_t _pid)
 {
-    pid = _pid;
+  m_pid = _pid;
 }
 
 pid_t Config::getSid()
 {
-    return _sid;
+  return m_sid;
 }
 
 pid_t Config::getPid()
 {
-    return _pid;
+  return m_pid;
 }

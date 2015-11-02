@@ -13,14 +13,14 @@
 
 class Config
 {
-    public:
-        Config();
-        void setSid(pid_t _sid);
-        void setPid(pid_t _pid);
-        pid_t getSid();
-        pid_t getPid();
+  public:
+    Config();
+    void setSid(pid_t _sid);
+    void setPid(pid_t _pid);
+    pid_t getSid();
+    pid_t getPid();
 
-    private:
-        pid_t sid;
-        pid_t pid;
+  private:
+    pid_t m_sid;
+    pid_t m_pid;
 }
