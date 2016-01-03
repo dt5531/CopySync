@@ -14,7 +14,7 @@
 
 using namespace std;
 
-Deamon::Deamon()
+Daemon::Daemon()
 {
   m_configs = unique_ptr<Config>(new Config());
   m_clipbd = unique_ptr<Clipboard>(new Clipboard());
@@ -68,7 +68,7 @@ void Daemon::init_process()
 
   if (chdir("/home/david/work/daemon/CopySync/log") < 0)
   {
-    throw std::exception("Can't get into log location.");
+    throw "Can't get into log location.";
   }
 
   // Create a new Signature Id for our child
@@ -76,7 +76,7 @@ void Daemon::init_process()
   sid = setsid();
   if (sid < 0) 
   { 
-    throw std::exception("Failed to get a session ID.");
+    throw "Failed to get a session ID.";
   }
 
   m_configs->setSid(sid);
@@ -92,8 +92,13 @@ void Daemon::run()
 {
   while(true)
   {
-    process(clipbd.get());           //Run our Process
+    process();           //Run our Process
     sleep(1);                   //Update once every second
   }
 
+}
+
+void Daemon::stop()
+{
+  clean();
 }

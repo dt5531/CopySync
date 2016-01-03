@@ -19,8 +19,8 @@ int main(int argc, char** argv)
   try
   {
     unique_ptr<Daemon> daemon = unique_ptr<Daemon>(new Daemon());
-    daemon.run();
-    daemon.clean();
+    daemon->run();
+    daemon->stop();
   }
   catch (exception& e)
   {

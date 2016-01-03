@@ -23,4 +23,4 @@ class Config
   private:
     pid_t m_sid;
     pid_t m_pid;
-}
+};

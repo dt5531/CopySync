@@ -29,7 +29,7 @@ int Clipboard::set_clipboard_text(string text)
     return 0;
   }
 
-  if (fwrite(text.c_str(), sizeof(char), len, xclip) != len())
+  if (fwrite(text.c_str(), sizeof(char), len, xclip) != len)
   {
     return 0;
   }
@@ -59,19 +59,15 @@ void Clipboard::get_clipboard_text()
     if (len)
     {
       txt += buffer;
-      total_len += len;
     }
   } while (len == 1023);
 
-  if (pclose != 0)
+  if (pclose(xclip) != 0)
   {
     return;
   }
   m_value = txt;
 
-  /* string ret_str = text; */
-  /* m_value = ret_str; */
-  /* free(text); */
   return;
 }
 
@@ -80,13 +76,15 @@ void Clipboard::update()
   get_clipboard_text();
 
   // TODO get server side data
+  
+  return;
 
-  if (server_clipboard_value == m_value)
-  {
-    return;
-  }
-  else
-  {
-    // update m_value or change current m_value to match server
-  }
+  /* if (server_clipboard_value == m_value) */
+  /* { */
+  /*   return; */
+  /* } */
+  /* else */
+  /* { */
+  /*   // update m_value or change current m_value to match server */
+  /* } */
 }

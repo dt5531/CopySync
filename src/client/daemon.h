@@ -18,13 +18,13 @@ class Daemon
 {
   public:
     Daemon();
-    ~Daemon();
     void run();
     void process();
+    void stop();
   private:
     std::unique_ptr<Config> m_configs;
     std::unique_ptr<Clipboard> m_clipbd;
     void init_log();
     void init_process();
     void clean();
-}
+};

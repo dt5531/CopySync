@@ -2,7 +2,7 @@
 #include <string>
 
 
-class clipboard
+class Clipboard
 {
   public:
     Clipboard();
@@ -12,4 +12,4 @@ class clipboard
     void get_clipboard_text();
     int set_clipboard_text(std::string text);
     std::string m_value;
-}
+};
