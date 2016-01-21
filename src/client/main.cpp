@@ -1,13 +1,13 @@
-#include <sys/types.h>
-#include <sys/stat.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <memory>
 #include <stdio.h>
 #include <stdlib.h>
-#include <fcntl.h>
-#include <errno.h>
-#include <unistd.h>
-#include <syslog.h>
 #include <string.h>
-#include <memory>
+#include <syslog.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 #include "daemon.h"
 #include "config.h"
@@ -24,6 +24,7 @@ int main(int argc, char** argv)
   }
   catch (exception& e)
   {
+    cout << "exception " << e << "has occured" << endl;
     return 1;
   }
   return 0;

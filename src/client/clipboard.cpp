@@ -1,7 +1,8 @@
+#include <memory>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
-#include <memory>
+
 #include "clipboard.h"
 
 #define XCLIP_SELECT "/usr/bin/xclip -selection c"
@@ -12,7 +13,7 @@ Clipboard::Clipboard()
   m_value = "";
 }
 
-std::string Clipboard::get_clipboard()
+string Clipboard::get_clipboard()
 {
   return m_value;
 }
@@ -78,13 +79,4 @@ void Clipboard::update()
   // TODO get server side data
   
   return;
-
-  /* if (server_clipboard_value == m_value) */
-  /* { */
-  /*   return; */
-  /* } */
-  /* else */
-  /* { */
-  /*   // update m_value or change current m_value to match server */
-  /* } */
 }
