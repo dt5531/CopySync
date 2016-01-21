@@ -1,38 +1,38 @@
-#include <sys/types.h>
-#include <sys/stat.h>
+#include <errno.h>
+#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <fcntl.h>
-#include <errno.h>
-#include <unistd.h>
-#include <syslog.h>
 #include <string.h>
+#include <syslog.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 #include "config.h"
 
 
 Config::Config()
 {
-    sid = 0;
-    pid = 0;
+  m_sid = 0;
+  m_pid = 0;
 }
 
 void Config::setSid(pid_t _sid)
 {
-    sid = _sid;
+  m_sid = _sid;
 }
 
 void Config::setPid(pid_t _pid)
 {
-    pid = _pid;
+  m_pid = _pid;
 }
 
 pid_t Config::getSid()
 {
-    return _sid;
+  return m_sid;
 }
 
 pid_t Config::getPid()
 {
-    return _pid;
+  return m_pid;
 }
