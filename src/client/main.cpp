@@ -1,5 +1,6 @@
 #include <errno.h>
 #include <fcntl.h>
+#include <iostream>
 #include <memory>
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,6 +15,12 @@
 
 using namespace std;
 
+void sig_handler(int SIG)
+{
+  closelog();
+  exit(0);
+}
+
 int main(int argc, char** argv)
 {
   try
@@ -24,7 +31,7 @@ int main(int argc, char** argv)
   }
   catch (exception& e)
   {
-    cout << "exception " << e << "has occured" << endl;
+    cout << "exception " << e.what() << "has occured" << endl;
     return 1;
   }
   return 0;

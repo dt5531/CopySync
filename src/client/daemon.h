@@ -18,8 +18,14 @@ class Daemon
 {
   public:
     Daemon();
+    // This function takes no argument and return nothing.
+    // This function runs the daemon.
     void run();
+    // This function takes no argument and return nothing.
+    // This function updates the current clipboard data
     void process();
+    // This function takes no argument and return nothing.
+    // This function does graceful exit for the daemon.
     void stop();
   private:
     std::unique_ptr<Config> m_configs;

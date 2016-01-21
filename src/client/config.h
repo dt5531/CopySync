@@ -15,9 +15,17 @@ class Config
 {
   public:
     Config();
+    // This function takes a sid as arguement and returns nothing.
+    // This functions stores the program's sid.
     void setSid(pid_t _sid);
+    // This function takes a pid as arguement and returns nothing.
+    // This functions stores the program's pid.
     void setPid(pid_t _pid);
+    // This function takes nothing as argument and return the program's sid.
+    // This function returns the program's sid.
     pid_t getSid();
+    // This function takes nothing as argument and return the program's pid.
+    // This function returns the program's pid.
     pid_t getPid();
 
   private:

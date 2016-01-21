@@ -1,6 +1,7 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <memory>
+#include <pwd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -60,8 +61,20 @@ void Daemon::init_process()
   // and others have no permission to do anything
   umask(027);
 
+  // Attempt to get user's directory through env variable
+  string homedir = getenv("HOME");
+  if (homedir == "")
+  {
+    // Get it throught password file entry
+    homedir = getpwuid(getuid())->pw_dir;
+  }
+  string log_dir = homedir + "/.CopySync";
+
+  // Create new directory for logging
+  mkdir(log_dir.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+
   // change directory for logging
-  if (chdir("/home/david/work/daemon/CopySync/log") < 0)
+  if (chdir((log_dir + "/log").c_str()) < 0)
   {
     throw "Can't get into log location.";
   }
@@ -72,12 +85,6 @@ void Daemon::init_process()
   { 
     throw "Failed to get a session ID.";
   }
-  catch (string e)
-  {
-    cout << "An error has occured. " << e << endl;
-    exit(1);
-  }
-
   m_configs->setSid(sid);
   m_configs->setPid(pid);
 }
